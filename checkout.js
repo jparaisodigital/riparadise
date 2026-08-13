@@ -249,12 +249,13 @@ function renderCheckoutSummary() {
             showSuccess(order);
             
             if (isCod) {
-                
+                // Optional backup copy
                 const detailsText = buildOrderDetailsText(order);
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(detailsText).catch(() => {});
                 }
-                
+            
+                // Open Messenger with pre-filled text
                 setTimeout(() => {
                     goToMessengerWithOrder(order);
                 }, 900);
@@ -414,11 +415,10 @@ function renderCheckoutSummary() {
         
         function goToMessengerWithOrder(order) {
             const text = buildOrderDetailsText(order);
-            const url = (CONFIG.messenger && CONFIG.messenger.url) || '#';
+            const baseUrl = (CONFIG.messenger && CONFIG.messenger.url) || 'https://m.me/100063752149428';
             
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).catch(() => {});
-            }
+            // Pre-fill the message
+            const url = baseUrl + '?text=' + encodeURIComponent(text);
             
             window.open(url, '_blank');
         }
