@@ -237,33 +237,26 @@ function renderCheckoutSummary() {
                 total: subtotal + shippingFee
             };
             
-            // local record ng order (per browser)
+            
             const orders = JSON.parse(localStorage.getItem('rip_orders') || '[]');
             orders.push(order);
             localStorage.setItem('rip_orders', JSON.stringify(orders));
             
-            // linisin ang cart
+            
             saveCart([]);
             renderCheckoutSummary();
             
             showSuccess(order);
             
-            if (isCod) {
-                // Optional backup copy
-                const detailsText = buildOrderDetailsText(order);
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(detailsText).catch(() => {});
-                }
-            
-                // Open Messenger with pre-filled text
-                setTimeout(() => {
-                    goToMessengerWithOrder(order);
-                }, 900);
-            }
+            // Both COD and GCash → auto open Messenger with pre-filled details
+            const delay = isCod ? 900 : 2200; 
+            setTimeout(() => {
+                goToMessengerWithOrder(order);
+            }, delay);
         }
         
         // ======================
-        // MESSENGER REDIRECT (dalawang tap)
+        // MESSENGER REDIRECT
         // ======================
         let messengerArmed = false;
         let currentOrderPayment = null;
@@ -381,11 +374,16 @@ function renderCheckoutSummary() {
                 'We copied your order details and opened Messenger for you — just paste and send to confirm your same-day delivery.';
                 if (messengerBtn) messengerBtn.style.display = 'none';
             } else {
+                // GCash
                 const method = CONFIG.payments.find(p => p.id === order.payment);
                 instructions.innerHTML = `
-            <img src="${method.qr}" alt="${method.label} QR" class="success-qr" />
-            Send the exact amount via ${method.label}, then tap below to message us your proof of payment.`;
-                if (messengerBtn) messengerBtn.style.display = '';
+                    <img src="${method.qr}" alt="${method.label} QR" class="success-qr" />
+                    <p style="margin-top:14px; line-height:1.5;">
+                        Redirecting you to Messenger…<br>
+                        Your order details are ready — attach your GCash receipt and send.
+                    </p>
+                `;
+                if (messengerBtn) messengerBtn.style.display = 'none'; // auto-redirect na
             }
             
             document.getElementById('order-success').classList.add('active');
@@ -416,10 +414,7 @@ function renderCheckoutSummary() {
         function goToMessengerWithOrder(order) {
             const text = buildOrderDetailsText(order);
             const baseUrl = (CONFIG.messenger && CONFIG.messenger.url) || 'https://m.me/100063752149428';
-            
-            // Pre-fill the message
             const url = baseUrl + '?text=' + encodeURIComponent(text);
-            
             window.open(url, '_blank');
         }
         
