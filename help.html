@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HELP — R.I.PARADISE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    
+    <header class="site-header">
+        <a href="#cart" class="cart-link" aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count"></span>
+        </a>
+        
+        <a href="help.html" class="help-link">HELP</a>
+        
+        <a href="index.html" class="logo" id="logo"></a>
+        
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <nav class="nav" id="nav"></nav>
+    </header>
+    
+    <main class="help-page">
+        <h1 class="help-title">HELP</h1>
+        
+        <section class="help-section">
+            <h2 class="help-heading">FAQs</h2>
+            
+            <div class="help-item">
+                <h3 class="help-question">How do I place an order?</h3>
+                <p class="help-answer">Choose your item and size, add it to your cart, and complete checkout. Please double-check your size, address, and order details before placing your order.</p>
+            </div>
+            
+            <div class="help-item">
+                <h3 class="help-question">How long does shipping take?</h3>
+                <p class="help-answer">Orders are usually processed within 1–3 business days. Delivery time depends on your location and courier.</p>
+            </div>
+        </section>
+        
+        <section class="help-section">
+            <h2 class="help-heading">Terms &amp; Conditions</h2>
+            <p class="help-intro">By placing an order with us, you agree to the following terms:</p>
+            <ul class="help-list">
+                <li>Customers are responsible for providing the correct name, address, contact number, and order information.</li>
+                <li>Orders are only considered confirmed after payment has been successfully received.</li>
+            </ul>
+        </section>
+        
+        <section class="help-section">
+            <h2 class="help-heading">Return &amp; Exchange Policy</h2>
+            <ul class="help-list">
+                <li>No returns or exchanges due to change of mind or incorrect sizing.</li>
+                <li>Exchanges may be considered only for defective, damaged, or incorrectly sent items.</li>
+                <li>Items must be unused, unwashed, and in their original condition.</li>
+                <li>Customers must contact us within 48 hours of receiving the order.</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="socials" id="socials"></div>
+    </footer>
+    
+    <!-- CART DRAWER -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <span class="cart-drawer-title">CART</span>
+            <button class="cart-drawer-close" id="cart-drawer-close">×</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>SUBTOTAL</span>
+                <span id="cart-subtotal">—</span>
+            </div>
+            <a href="checkout.html" class="cart-checkout-btn">CHECKOUT</a>
+        </div>
+    </aside>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    
+    <script src="config.js"></script>
+    <script src="cart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

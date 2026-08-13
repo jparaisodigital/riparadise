@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHAPTERS — R.I.PARADISE</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="chapters-page">
+    
+    
+    <!-- MANIFESTO -->
+    <section class="chapters-manifesto" id="chapters-manifesto">
+        <h2 class="chapters-manifesto-title" id="chapters-manifesto-title"></h2>
+        <p class="chapters-manifesto-text" id="chapters-manifesto-text"></p>
+    </section>
+    
+    <header class="site-header">
+        <!-- Cart icon -->
+        <a href="#cart" class="cart-link" aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count"></span>
+        </a>
+        
+        <!-- HELP (desktop only — before cart) -->
+        <a href="help.html" class="help-link">HELP</a>
+        
+        <!-- Logo (hidden on this page via CSS) -->
+        <a href="index.html" class="logo" id="logo"></a>
+        
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Nav -->
+        <nav class="nav" id="nav"></nav>
+    </header>
+    
+    <main class="chapters-main">
+        <div class="gallery-mosaic" id="gallery-mosaic"></div>
+    </main>
+    
+    <!-- IG REEL + PICTURE SECTION -->
+    <section class="chapters-media" id="chapters-media">
+        <div class="chapters-media-reel" id="chapters-media-reel"></div>
+        <div class="chapters-media-image" id="chapters-media-image"></div>
+    </section>
+    
+    <!-- TIMELINE -->
+    <section class="chapters-timeline" id="chapters-timeline">
+        <div class="chapters-timeline-list" id="chapters-timeline-list"></div>
+    </section>
+    
+    <!-- GALLERY LIGHTBOX -->
+    <div class="modal-overlay" id="gallery-lightbox">
+        <div class="modal gallery-lightbox-modal">
+            <button class="modal-close" id="gallery-lightbox-close">×</button>
+            <img id="gallery-lightbox-img" src="" alt="Chapter" />
+        </div>
+    </div>
+    
+    <!-- ====================== -->
+    <!-- FOOTER THANK YOU       -->
+    <!-- (tombstone rubbing)   -->
+    <!-- ====================== -->
+    <section class="footer-thanks" id="footer-thanks">
+        <div class="ft-overlay"></div>
+        
+        <div class="ft-content">
+            <div class="tombstone">
+                <div class="tombstone-face">
+                    <div class="tombstone-text">
+                        <div class="ft-title" id="ft-title"></div>
+                        <div class="ft-message" id="ft-message"></div>
+                    </div>
+                </div>
+                <canvas class="tombstone-canvas" id="ft-canvas" width="230" height="270"></canvas>
+            </div>
+            
+            <p class="ft-signature" id="ft-signature"></p>
+        </div>
+        
+        <footer class="site-footer chapters-footer">
+            <div class="socials" id="socials"></div>
+        </footer>
+    </section>
+    
+    <!-- CART DRAWER -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <span class="cart-drawer-title">CART</span>
+            <button class="cart-drawer-close" id="cart-drawer-close">×</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>SUBTOTAL</span>
+                <span id="cart-subtotal">—</span>
+            </div>
+            <a href="checkout.html" class="cart-checkout-btn">CHECKOUT</a>
+        </div>
+    </aside>
+    
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top-btn" id="scroll-top-btn" aria-label="Back to top">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+        <span class="scroll-top-btn-label">TOP</span>
+    </button>
+    
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+    
+    <script src="config.js"></script>
+    <script src="cart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
