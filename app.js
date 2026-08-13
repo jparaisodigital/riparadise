@@ -286,6 +286,7 @@ if (hamburger && nav) {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         nav.classList.toggle('open');
+        document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     });
     
     // Close menu when clicking a link
@@ -293,7 +294,17 @@ if (hamburger && nav) {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             nav.classList.remove('open');
+            document.body.style.overflow = '';
         });
+    });
+    
+    // Close menu when tapping outside of it
+    document.addEventListener('click', (e) => {
+        if (!nav.classList.contains('open')) return;
+        if (nav.contains(e.target) || hamburger.contains(e.target)) return;
+        hamburger.classList.remove('active');
+        nav.classList.remove('open');
+        document.body.style.overflow = '';
     });
 }
 

@@ -397,7 +397,7 @@ function renderCheckoutSummary() {
             });
             lines.push('');
             lines.push('Subtotal: ' + formatPrice(order.subtotal));
-            lines.push('Payment: Cash on delivery');
+            lines.push('Payment: Same day delivery (Cash on delivery)');
             lines.push('Delivery: Same-day via Lalamove / Grab Express');
             lines.push('');
             lines.push('Name: ' + order.customer.firstName + ' ' + order.customer.lastName);

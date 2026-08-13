@@ -1704,6 +1704,14 @@ CHAPTERS — FULL-BLEED MOSAIC GALLERY (scrollable)
     background: #111111;
 }
 
+/* Force white when mobile menu is open (chapters page) */
+.chapters-page .nav.open a {
+    color: #fff;
+}
+.chapters-page .nav.open a::after {
+    background: #fff;
+}
+
 .chapters-page .hamburger span {
     background: #111111;
 }
