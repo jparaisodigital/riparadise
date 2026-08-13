@@ -114,7 +114,7 @@ const CONFIG = {
             imageHover: "assets/slide (1).png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
             sizes: ["S", "M", "L", "XL"],
-            soldOut: true
+            soldOut: false
         },
         
         {
