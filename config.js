@@ -169,7 +169,7 @@ const CONFIG = {
     },
     // Payment methods (checkout) — GCASH / COD
     payments: [
-        { id: "gcash", label: "GCASH", iconImage: "assets/payment/gcash.png", qr: "assets/payment/QR.JPG" },
+        { id: "gcash", label: "GCASH", iconImage: "assets/payment/gcash.png", qr: "assets/payment/QR.jpg" },
         { id: "cod", label: "SAME DAY DELIVERY", iconImage: null, qr: null }
     ],
     
