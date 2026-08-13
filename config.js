@@ -113,7 +113,8 @@ const CONFIG = {
             image: "assets/2222.png",        
             imageHover: "assets/slide (1).png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
-            sizes: ["S", "M", "L", "XL"]
+            sizes: ["S", "M", "L", "XL"],
+            soldOut: true
         },
         
         {
@@ -123,7 +124,8 @@ const CONFIG = {
             image: "assets/3.png",       
             imageHover: "assets/slide (2).png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
-            sizes: ["S", "M", "L", "XL"]
+            sizes: ["S", "M", "L", "XL"],
+            soldOut: false
         },
         
         {
@@ -133,7 +135,8 @@ const CONFIG = {
             image: "assets/222.png",        
             imageHover: "assets/slide (3).png",  
             description: "Heavy Cotton. Oversized Fitting. Reflective.",
-            sizes: ["S", "M", "L", "XL"]
+            sizes: ["S", "M", "L", "XL"],
+            soldOut: false
         },
         
         {
@@ -143,7 +146,8 @@ const CONFIG = {
             image: "assets/2.png",       
             imageHover: "assets/slide (6).png", 
             description: "Heavy Cotton. 300GSM. Backprint. In collaboration w/ 1210",
-            sizes: ["L", "XL", "2XL"]
+            sizes: ["L", "XL", "2XL"],
+            soldOut: false
         },
     ],
     

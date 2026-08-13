@@ -89,10 +89,12 @@ function renderProducts() {
     
     grid.innerHTML = CONFIG.products.map(product => {
         const hasHover = product.imageHover ? true : false;
+        const isSoldOut = product.soldOut === true;
         
         return `
-        <div class="product-card" data-id="${product.id}">
+        <div class="product-card ${isSoldOut ? 'sold-out' : ''}" data-id="${product.id}">
           <div class="product-image-wrap ${hasHover ? 'has-hover' : ''}">
+            ${isSoldOut ? '<span class="product-badge">Sold Out</span>' : ''}
             <img src="${product.image}" alt="${product.name}" class="product-image primary" />
             ${hasHover ? `<img src="${product.imageHover}" alt="${product.name}" class="product-image secondary" />` : ''}
           </div>
@@ -104,35 +106,33 @@ function renderProducts() {
       `;
     }).join('');
     
+    
     // Click to open modal
-grid.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-        
-        // Image click → toggle between 1st & 2nd image only
-        if (e.target.closest('.product-image-wrap')) {
-            const wrap = e.target.closest('.product-image-wrap');
-            if (wrap.classList.contains('has-hover')) {
-                
-                if (wrap.classList.contains('show-secondary')) {
-                    wrap.classList.remove('show-secondary');
-                } else {
-                    wrap.classList.add('show-secondary');
+    grid.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            
+            const isTouchDevice = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+            
+            // Touch only: image click → toggle secondary image
+            if (isTouchDevice && e.target.closest('.product-image-wrap')) {
+                const wrap = e.target.closest('.product-image-wrap');
+                if (wrap.classList.contains('has-hover')) {
+                    wrap.classList.toggle('show-secondary');
                 }
+                return; 
             }
-            return; 
-        }
-        
-        
-        const id = card.dataset.id;
-        const product = CONFIG.products.find(p => p.id === id);
-        if (product) {
+            
+            // Desktop (hover) OR touch click sa name/price → open modal
+            const id = card.dataset.id;
+            const product = CONFIG.products.find(p => p.id === id);
+            if (!product || product.soldOut) return;
+            
             const rect = card.getBoundingClientRect();
             const cardCenter = rect.left + rect.width / 2;
             const side = cardCenter < window.innerWidth / 2 ? 'left' : 'right';
             openProductModal(product, side);
-        }
+        });
     });
-});
 }
 
 // ======================
@@ -158,6 +158,33 @@ function openProductModal(product, side = 'right') {
     document.getElementById('pd-name').textContent = product.name;
     document.getElementById('pd-price').textContent = formatPrice(product.price);
     document.getElementById('pd-description').textContent = product.description;
+    
+    // Stock note
+    let stockNote = document.getElementById('pd-stock-note');
+    if (!stockNote) {
+        stockNote = document.createElement('p');
+        stockNote.id = 'pd-stock-note';
+        stockNote.className = 'pd-stock-note';
+        const desc = document.getElementById('pd-description');
+        desc.parentNode.insertBefore(stockNote, desc);
+    }
+    stockNote.textContent = 'Stock is limited / subject to availability';
+    
+    // Disable Add to Cart if sold out
+    const addBtn = document.getElementById('pd-add-to-cart');
+    if (addBtn) {
+        if (product.soldOut) {
+            addBtn.textContent = 'SOLD OUT';
+            addBtn.disabled = true;
+            addBtn.style.opacity = '0.5';
+            addBtn.style.cursor = 'not-allowed';
+        } else {
+            addBtn.textContent = 'ADD TO CART';
+            addBtn.disabled = false;
+            addBtn.style.opacity = '';
+            addBtn.style.cursor = '';
+        }
+    }
     
     // Sizes
     const sizeSelect = document.getElementById('pd-size');

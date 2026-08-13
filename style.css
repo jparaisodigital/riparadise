@@ -2416,3 +2416,54 @@ HELP PAGE
         margin-bottom: 40px;
     }
 }
+
+
+/* Critical text (Help page) */
+.text-critical {
+    color: #c0392b;
+    font-weight: 700;
+    animation: critical-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes critical-breathe {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 0 transparent;
+    }
+    50% {
+        opacity: 0.82;
+        text-shadow: 0 0 8px rgba(192, 57, 43, 0.45);
+    }
+}
+
+/* SOLD OUT badge */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    z-index: 3;
+}
+
+.product-card.sold-out {
+    opacity: 0.72;
+    pointer-events: none; 
+}
+
+.product-card.sold-out .product-image-wrap {
+    filter: grayscale(0.35);
+}
+
+.pd-stock-note {
+    font-size: 12px;
+    color: #c0392b;
+    letter-spacing: 0.03em;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}

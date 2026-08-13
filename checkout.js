@@ -163,7 +163,7 @@ function renderCheckoutSummary() {
                 qrBox.hidden = false;
                 codNote.hidden = true;
                 qrImage.innerHTML = `<img src="${method.qr}" alt="${method.label} QR" />`;
-                qrNote.textContent = `Scan the QR and send the exact amount via ${method.label}. Keep your proof of payment.`;
+                qrNote.innerHTML = `1. Scan & pay via GCash<br>2. Click Place Order<br><span class="text-critical">3. Send receipt to Messenger</span>`;
             } else {
                 qrBox.hidden = true;
                 codNote.hidden = false;
