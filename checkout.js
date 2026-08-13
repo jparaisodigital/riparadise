@@ -249,6 +249,12 @@ function renderCheckoutSummary() {
             showSuccess(order);
             
             if (isCod) {
+                
+                const detailsText = buildOrderDetailsText(order);
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(detailsText).catch(() => {});
+                }
+                
                 setTimeout(() => {
                     goToMessengerWithOrder(order);
                 }, 900);
