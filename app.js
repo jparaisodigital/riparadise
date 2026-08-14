@@ -37,6 +37,10 @@ function renderNav() {
 function renderBottom() {
     const logoEl = document.getElementById('logo');
     const socialsEl = document.getElementById('socials');
+    const copyEl = document.getElementById('footer-copy');
+if (copyEl) {
+    copyEl.textContent = '© ' + CONFIG.brand.year + ' ' + CONFIG.brand.name + ' — ALL RIGHTS RESERVED';
+}
     
     if (logoEl) {
         logoEl.innerHTML = `<img src="${CONFIG.brand.logo}" alt="${CONFIG.brand.name}" />`;
@@ -78,6 +82,139 @@ function renderCTA() {
     if (!btn) return;
     btn.textContent = CONFIG.cta.text;
     btn.href = CONFIG.cta.href;
+}
+
+// ======================
+// LOOKBOOK (hero + random crossfade grid)
+// ======================
+function renderLookbook() {
+    const section = document.getElementById('lookbook');
+    const heroEl = document.getElementById('lookbook-hero');
+    const gridEl = document.getElementById('lookbook-grid');
+
+    if (
+        !section ||
+        !CONFIG.lookbook ||
+        CONFIG.lookbook.enabled === false
+    ) {
+        if (section) section.style.display = 'none';
+        return;
+    }
+
+    const images = CONFIG.lookbook.images || [];
+
+    if (!images.length) return;
+
+
+    /* ==========================================================
+       RIGHT SIDE — STATIC 8 IMAGES
+       ========================================================== */
+
+    if (gridEl) {
+        gridEl.innerHTML = images.map((src, i) => `
+            <div class="lookbook-cell" data-index="${i}">
+                <img src="${src}" alt="Lookbook ${i + 1}" loading="lazy">
+            </div>
+        `).join('');
+    }
+
+
+    /* ==========================================================
+       LEFT SIDE — RANDOM IMAGE CYCLER
+       ========================================================== */
+
+    if (heroEl) {
+
+        // Two layers para smooth crossfade
+        heroEl.innerHTML = `
+            <img src="${images[0]}" class="active" alt="Lookbook">
+            <img src="${images[0]}" alt="Lookbook">
+        `;
+
+        const imgs = heroEl.querySelectorAll('img');
+
+        let currentIndex = 0;
+
+        function cycleHero() {
+
+            // Pick random image from the SAME pool
+            let nextIndex;
+
+            do {
+                nextIndex = Math.floor(Math.random() * images.length);
+            } while (
+                images.length > 1 &&
+                nextIndex === currentIndex
+            );
+
+            currentIndex = nextIndex;
+
+            const showing = imgs[0].classList.contains('active')
+                ? imgs[0]
+                : imgs[1];
+
+            const hidden = showing === imgs[0]
+                ? imgs[1]
+                : imgs[0];
+
+            // Preload next image
+            const nextImage = new Image();
+
+            nextImage.onload = () => {
+
+                hidden.src = images[nextIndex];
+
+                // Fade new image IN
+                hidden.classList.add('active');
+
+                // Fade old image OUT
+                showing.classList.remove('active');
+
+                // Schedule next rotation
+                setTimeout(
+                    cycleHero,
+                    5000 + Math.random() * 3000
+                );
+            };
+
+            nextImage.onerror = () => {
+
+                // Kung failed ang image, try ulit later
+                setTimeout(cycleHero, 3000);
+            };
+
+            nextImage.src = images[nextIndex];
+        }
+
+
+        /* ======================================================
+           HERO ENTRANCE ANIMATION
+           ====================================================== */
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    heroEl.classList.add('in-view');
+
+                    observer.disconnect();
+
+                    // Start changing images after entrance
+                    setTimeout(() => {
+                        cycleHero();
+                    }, 3000);
+                }
+
+            });
+
+        }, {
+            threshold: 0.3
+        });
+
+        observer.observe(heroEl);
+    }
 }
 
 // ======================
@@ -489,6 +626,7 @@ function renderCartDrawer() {
         renderBottom();
         initSlideshow();
         renderCTA();
+        renderLookbook();
         renderProducts();
         initModals();
         initPageTransitions();
@@ -744,13 +882,12 @@ function renderCartDrawer() {
                 
                 mosaicEl.querySelectorAll('.gallery-item').forEach(el => {
                     el.addEventListener('click', () => {
-                        // Unang click/tap sa litrato = alisin muna ang tomb
                         if (!section.classList.contains('tomb-gone')) {
                             section.classList.add('tomb-gone');
                             section.style.backgroundImage = 'none';
                             return;
                         }
-                        // Sunod na click (tomb gone na) = buksan ang litrato
+                    
                         const idx = parseInt(el.dataset.index, 10);
                         openGalleryLightbox(imgs[idx]);
                     });
@@ -759,7 +896,7 @@ function renderCartDrawer() {
             
             // ---- Arrow: permanent hide tomb ----
             if (hiddenEnabled && arrowBtn) {
-                arrowBtn.hidden = false; // element exists; visibility controlled by CSS class
+                arrowBtn.hidden = false;
                 
                 arrowBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -899,55 +1036,6 @@ function renderCartDrawer() {
             canvas.addEventListener('touchmove', move, { passive: false });
             canvas.addEventListener('touchend', end);
         }
-        
-        // ======================
-        // TOMB DISMISS — click/tap kahit saan sa loob ng revealed section
-        // ======================
-        document.addEventListener('DOMContentLoaded', () => {
-            const section = document.getElementById('footer-thanks');
-            if (!section) return;
-            
-            let lastRubEnd = 0;
-            window.addEventListener('mouseup',  () => { lastRubEnd = Date.now(); });
-            window.addEventListener('touchend', () => { lastRubEnd = Date.now(); });
-            
-            function dismissTomb() {
-                if (!section.classList.contains('revealed')) return;
-                if (section.classList.contains('tomb-gone')) return;
-                section.classList.add('tomb-gone');
-                section.style.backgroundImage = 'none';
-            }
-            
-            // Click sa background/mosaic (labas ng tombstone) → dismiss
-            section.addEventListener('click', (e) => {
-                if (e.target.closest('#reveal-arrow')) return;
-                if (e.target.closest('#ft-canvas')) return; // sariling tap-handler ito sa baba
-                if (Date.now() - lastRubEnd < 450) return;
-                dismissTomb();
-            });
-            
-            // Tap mismo sa tombstone — pero "tap" lang, hindi habang nag-ru-rub/drag
-            const canvas = document.getElementById('ft-canvas');
-            if (canvas) {
-                let downPos = null;
-                let dragMoved = false;
-                
-                canvas.addEventListener('pointerdown', (e) => {
-                    downPos = { x: e.clientX, y: e.clientY };
-                    dragMoved = false;
-                });
-                canvas.addEventListener('pointermove', (e) => {
-                    if (!downPos) return;
-                    const dx = e.clientX - downPos.x;
-                    const dy = e.clientY - downPos.y;
-                    if (Math.sqrt(dx * dx + dy * dy) > 6) dragMoved = true;
-                });
-                canvas.addEventListener('pointerup', () => {
-                    if (!dragMoved) dismissTomb();
-                    downPos = null;
-                });
-            }
-        });
         
         // ======================
         // SCROLL TO TOP BUTTON - CHAPTERS

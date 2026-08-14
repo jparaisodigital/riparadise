@@ -72,10 +72,27 @@ const CONFIG = {
         ]
     },
 
+        lookbook: {
+            enabled: true,
+            images: [
+            "assets/lookbook/1 (1).png",
+            "assets/lookbook/1 (2).png",
+            "assets/lookbook/1 (3).png",
+            "assets/lookbook/1 (4).png",
+            "assets/lookbook/1 (5).png",
+            "assets/lookbook/1 (6).png",
+            "assets/lookbook/1 (7).png",
+            "assets/lookbook/1 (8).png",
+            "assets/lookbook/1 (9).png",
+            "assets/lookbook/1 (10).png"
+        ]
+    },
+    
+
     // Hidden archive gallery (gems) — revealed by rubbing the tombstone
     hiddenGallery: {
         enabled: true,
-        rubThreshold: 60,
+        rubThreshold: 70,
         dimOpacity: 0.28,
         images: [
             "assets/gems/1 (1).webp",
