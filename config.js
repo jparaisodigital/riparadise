@@ -40,23 +40,19 @@ const CONFIG = {
     
     // Landing page slideshow (4 images)
     slides: [
-        "assets/slide (1).png",
-        "assets/slide (2).png",
-        "assets/slide (3).png",
-        "assets/slide (4).png"
+        "assets/main/1.png",
+        "assets/main/2.png",
+        "assets/main/3.png",
+        "assets/main/4.png",
+        "assets/main/5.png",
+        "assets/main/6.png",
+        "assets/main/7.png"
     ],
     
     // Shop Now button under the slides
     cta: {
         text: "SHOP NOW",
         href: "store.html"
-    },
-    
-    // sa config.js
-    chaptersMedia: {
-        instagramEmbed: "https://www.instagram.com/reel/DC89_V_TNmc/", 
-        image: "assets/igpic.png",
-        imageAlt: "R.I.PARADISE"
     },
     
     chaptersManifesto: {
@@ -73,6 +69,63 @@ const CONFIG = {
             { year: "2023", text: "First pop-up" },
             { year: "2025", text: "Expanded collection" },
             { year: "2026", text: "Current chapter" }
+        ]
+    },
+
+    // Hidden archive gallery (gems) — revealed by rubbing the tombstone
+    hiddenGallery: {
+        enabled: true,
+        rubThreshold: 60,
+        dimOpacity: 0.28,
+        images: [
+            "assets/gems/1 (1).webp",
+            "assets/gems/1 (2).webp",
+            "assets/gems/1 (3).webp",
+            "assets/gems/1 (4).webp",
+            "assets/gems/1 (5).webp",
+            "assets/gems/1 (6).webp",
+            "assets/gems/1 (7).webp",
+            "assets/gems/1 (8).webp",
+            "assets/gems/1 (9).webp",
+            "assets/gems/1 (10).webp",
+            "assets/gems/1 (11).webp",
+            "assets/gems/1 (12).webp",
+            "assets/gems/1 (13).webp",
+            "assets/gems/1 (14).webp",
+            "assets/gems/1 (15).webp",
+            "assets/gems/1 (16).webp",
+            "assets/gems/1 (17).webp",
+            "assets/gems/1 (18).webp",
+            "assets/gems/1 (19).webp",
+            "assets/gems/1 (20).webp",
+            "assets/gems/1 (21).webp",
+            "assets/gems/1 (22).webp",
+            "assets/gems/1 (23).webp",
+            "assets/gems/2 (1).webp",
+            "assets/gems/2 (2).webp",
+            "assets/gems/2 (3).webp",
+            "assets/gems/2 (4).webp",
+            "assets/gems/2 (5).webp",
+            "assets/gems/2 (6).webp",
+            "assets/gems/2 (7).webp",
+            "assets/gems/2 (8).webp",
+            "assets/gems/2 (9).webp",
+            "assets/gems/2 (10).webp",
+            "assets/gems/2 (11).webp",
+            "assets/gems/2 (12).webp",
+            "assets/gems/2 (13).webp",
+            "assets/gems/2 (14).webp",
+            "assets/gems/2 (15).webp",
+            "assets/gems/2 (16).webp",
+            "assets/gems/2 (17).webp",
+            "assets/gems/2 (18).webp",
+            "assets/gems/2 (19).webp",
+            "assets/gems/2 (20).webp",
+            "assets/gems/2 (21).webp",
+            "assets/gems/2 (22).webp",
+            "assets/gems/2 (23).webp",
+            "assets/gems/2 (24).webp",
+            "assets/gems/2 (25).webp"
         ]
     },
 
@@ -110,8 +163,8 @@ const CONFIG = {
             id: "p1",
             name: "Fitsmits Tee",
             price: 1000,
-            image: "assets/2222.png",        
-            imageHover: "assets/slide (1).png",  
+            image: "assets/products/1.png",        
+            imageHover: "assets/products/bb.png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
             sizes: ["S", "M", "L", "XL"],
             soldOut: false
@@ -121,8 +174,8 @@ const CONFIG = {
             id: "p2",
             name: "Fitsmits Tee",
             price: 1000,
-            image: "assets/3.png",       
-            imageHover: "assets/slide (2).png",  
+            image: "assets/products/2.png",       
+            imageHover: "assets/products/back2.png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
             sizes: ["S", "M", "L", "XL"],
             soldOut: false
@@ -132,8 +185,8 @@ const CONFIG = {
             id: "p3",
             name: "Riparadise x 1210 Logo Tee",
             price: 1000,
-            image: "assets/222.png",        
-            imageHover: "assets/slide (3).png",  
+            image: "assets/products/3.png",        
+            imageHover: "assets/products/back3.png",  
             description: "Heavy Cotton. Oversized Fitting. Reflective.",
             sizes: ["S", "M", "L", "XL"],
             soldOut: false
@@ -143,8 +196,8 @@ const CONFIG = {
             id: "p4",
             name: "Fitsmits Hoodie",
             price: 2200,
-            image: "assets/2.png",       
-            imageHover: "assets/slide (6).png", 
+            image: "assets/products/4.png",       
+            imageHover: "assets/products/back4.png", 
             description: "Heavy Cotton. 300GSM. Backprint. In collaboration w/ 1210",
             sizes: ["L", "XL", "2XL"],
             soldOut: false
@@ -162,7 +215,7 @@ const CONFIG = {
             ["LARGE", "25", "30", "11"],
             ["XL", "26", "31", "11.5"]
         ],
-        image: "assets/ripchart.jpg"
+        image: "assets/payment/ripchart.jpg"
     },
     
     
@@ -204,33 +257,94 @@ const CONFIG = {
     // Swap paths anytime; code auto-adjusts layout from size
     // Chapters gallery — mosaic grid (size: "large" | "medium" | "small")
     gallery: [
-        { image: "assets/chapter (1).png",  size: "large" },
-        { image: "assets/chapter (2).png",  size: "medium" },
-        { image: "assets/chapter (3).png",  size: "small" },
-        { image: "assets/chapter (4).png",  size: "medium" },
-        { image: "assets/chapter (5).png",  size: "small" },
-        { image: "assets/chapter (6).png",  size: "small" },
-        { image: "assets/chapter (7).png",  size: "medium" },
-        { image: "assets/chapter (8).png",  size: "small" },
-        { image: "assets/chapter (9).png",  size: "medium" },
-        { image: "assets/chapter (10).png", size: "small" },
-        { image: "assets/chapter (11).png", size: "large" },
-        { image: "assets/chapter (12).png", size: "small" },
-        { image: "assets/chapter (13).png", size: "small" },
-        { image: "assets/chapter (14).png", size: "medium" },
-        { image: "assets/chapter (15).png", size: "small" },
-        { image: "assets/chapter (16).png", size: "small" },
-        { image: "assets/chapter (17).png", size: "medium" },
-        { image: "assets/chapter (18).png", size: "small" },
-        { image: "assets/chapter (19).png", size: "small" },
-        { image: "assets/chapter (20).png", size: "small" }
+        { image: "assets/1 (1).png",  size: "large" },
+        { image: "assets/1 (2).png",  size: "medium" },
+        { image: "assets/1 (3).png",  size: "small" },
+        { image: "assets/1 (4).png",  size: "medium" },
+        { image: "assets/1 (5).png",  size: "small" },
+        { image: "assets/1 (6).png",  size: "small" },
+        { image: "assets/1 (7).png",  size: "medium" },
+        { image: "assets/1 (8).png",  size: "small" },
+        { image: "assets/1 (9).png",  size: "medium" },
+        { image: "assets/1 (10).png", size: "small" },
+        { image: "assets/1 (11).png", size: "large" },
+        { image: "assets/1 (12).png", size: "large" },
+        { image: "assets/1 (13).png", size: "small" },
+        { image: "assets/1 (14).png", size: "medium" },
+        { image: "assets/1 (15).png", size: "small" },
+        { image: "assets/1 (16).png", size: "small" },
+        { image: "assets/1 (17).png", size: "medium" },
+        { image: "assets/1 (18).png", size: "small" },
+        { image: "assets/1 (19).png", size: "small" },
+        { image: "assets/1 (20).png", size: "small" },
+        { image: "assets/1 (21).png", size: "medium" },
+        { image: "assets/1 (22).png", size: "small" },
+        { image: "assets/1 (23).png", size: "small" },
+        { image: "assets/1 (24).png", size: "medium" },
+        { image: "assets/1 (25).png", size: "small" },
+        { image: "assets/1 (26).png", size: "small" },
+        { image: "assets/1 (27).png", size: "medium" },
+        { image: "assets/1 (28).png", size: "small" },
+        { image: "assets/1 (29).png", size: "small" },
+        { image: "assets/1 (30).png", size: "small" },
+        { image: "assets/1 (31).png", size: "medium" },
+        { image: "assets/1 (32).png", size: "small" },
+        { image: "assets/1 (33).png", size: "small" },
+        { image: "assets/1 (34).png", size: "medium" },
+        { image: "assets/1 (35).png", size: "small" },
+        { image: "assets/1 (36).png", size: "small" },
+        { image: "assets/1 (37).png", size: "medium" },
+        { image: "assets/1 (38).png", size: "small" },
+        { image: "assets/1 (39).png", size: "small" },
+        { image: "assets/1 (40).png", size: "medium" },
+        { image: "assets/1 (41).png", size: "small" },
+        { image: "assets/1 (42).png", size: "small" },
+        { image: "assets/1 (43).png", size: "medium" },
+        { image: "assets/1 (44).png", size: "small" },
+        { image: "assets/1 (45).png", size: "small" },
+        { image: "assets/1 (46).png", size: "medium" },
+        { image: "assets/1 (47).png", size: "small" },
+        { image: "assets/1 (48).png", size: "large" },
+        { image: "assets/1 (49).png", size: "medium" },
+        { image: "assets/1 (50).png", size: "small" },
+        { image: "assets/1 (51).png", size: "small" },
+        { image: "assets/1 (52).png", size: "small" },
+        { image: "assets/1 (53).png", size: "small" },
+        { image: "assets/1 (54).png", size: "large" },
+        { image: "assets/1 (55).png", size: "small" },
+        { image: "assets/1 (56).png", size: "medium" },
+        { image: "assets/1 (57).png", size: "small" },
+        { image: "assets/1 (58).png", size: "small" },
+        { image: "assets/1 (59).png", size: "medium" },
+        { image: "assets/1 (60).png", size: "large" },
+        { image: "assets/1 (61).png", size: "large" },
+        { image: "assets/1 (62).png", size: "small" },
+        { image: "assets/1 (63).png", size: "small" },
+        { image: "assets/1 (64).png", size: "small" },
+        { image: "assets/1 (65).png", size: "small" },
+        { image: "assets/1 (66).png", size: "medium" },
+        { image: "assets/1 (67).png", size: "small" },
+        { image: "assets/1 (68).png", size: "small" },
+        { image: "assets/1 (69).png", size: "small" },
+        { image: "assets/1 (70).png", size: "medium" },
+        { image: "assets/1 (71).png", size: "medium" },
+        { image: "assets/1 (72).png", size: "medium" },
+        { image: "assets/1 (73).png", size: "small" }
     ],
+    
+
+     // sa config.js
+     chaptersMedia: {
+        instagramEmbed: "https://www.instagram.com/reel/DC89_V_TNmc/", 
+        image: "assets/ig.png",
+        imageAlt: "R.I.PARADISE"
+    },
     
     // Footer — tombstone rubbing
     footerThanks: {
         enabled: true,  
-        backgroundImage: "assets/2 (15).png",
-        coverImage: "assets/2 (15).png", 
+        backgroundImage: "assets/tomb.png",
+        coverImage: "assets/tomb.png", 
         title: "RIP",
         message: "• THOSE WHO OWN PARADISE WILL LIVE IN PARADISE\n• IF YOU BELIEVE IN PARADISE YOU WILL EXPERIENCE PARADISE\n• YOU’RE NOT LIVING UNTIL YOU’RE LIVING FOR PARADISE\n• PARADISE IS INEVITABLE",
         signature: ""

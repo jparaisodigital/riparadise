@@ -133,8 +133,8 @@ LANDING
 .slideshow {
     position: relative;
     width: 100%;
-    max-width: 420px;
-    aspect-ratio: 1 / 1.15;
+    max-width: 480px;
+    aspect-ratio: 1 / 1.15;   /* fixed container size */
     overflow: hidden;
     background: transparent;
 }
@@ -144,9 +144,14 @@ LANDING
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;      /* ← zoom out / show full image */
     opacity: 0;
     transition: opacity 0.9s ease;
+}
+
+.slideshow img.active {
+    opacity: 1;
+    z-index: 2;
 }
 
 .slideshow img.active {
@@ -2069,6 +2074,207 @@ FOOTER THANK YOU (tombstone rubbing)
     font-size: 12px;
     color: #a29d92;
     margin-top: 4px;
+}
+
+/* ==========================================================
+   TOMBSTONE REVEAL — HIDDEN PHOTO MOSAIC
+   RESTORED FROM OLD WORKING VERSION
+========================================================== */
+
+.footer-thanks.tomb-gone {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+/* Hidden photo grid */
+.hidden-mosaic {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+
+    gap: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: scale(1.04);
+
+    transition:
+        opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 1.4s ease,
+        transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+    background: #fff;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Once 60% of tomb cover is erased */
+.footer-thanks.revealed .hidden-mosaic {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+/* Photo cells */
+.hidden-mosaic .gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    min-height: 0;
+}
+
+.hidden-mosaic .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transform: scale(1.02);
+
+    transition:
+        transform 0.35s ease,
+        filter 0.3s ease;
+}
+
+/* Photo hover */
+.hidden-mosaic .gallery-item:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.08);
+}
+
+/* ==========================================================
+TOMB SLIDE-DOWN DISMISS (click/tap sa collage after reveal)
+========================================================== */
+.ft-content {
+    transition:
+        transform 1s cubic-bezier(0.55, 0, 0.55, 1),
+        opacity 0.75s ease,
+        visibility 0s linear 1s;
+}
+.footer-thanks.tomb-gone .ft-content {
+    transform: translateY(60vh);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+/* Fade out ang dim/overlay */
+.ft-overlay,
+#dim-overlay {
+    pointer-events: none;
+    transition: opacity 1.1s ease;
+}
+.footer-thanks.tomb-gone .ft-overlay,
+.footer-thanks.tomb-gone #dim-overlay {
+    opacity: 0;
+}
+
+/* ==========================================================
+   STAGGERED PHOTO REVEAL
+========================================================== */
+
+.footer-thanks.revealed .hidden-mosaic .gallery-item {
+    animation:
+        gemFadeIn
+        0.9s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        both;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(3) {
+    animation-delay: 0.11s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(4) {
+    animation-delay: 0.14s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(5) {
+    animation-delay: 0.17s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(6) {
+    animation-delay: 0.20s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(7) {
+    animation-delay: 0.23s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(8) {
+    animation-delay: 0.26s;
+}
+
+.footer-thanks.revealed
+.hidden-mosaic
+.gallery-item:nth-child(n+9) {
+    animation-delay: 0.30s;
+}
+
+@keyframes gemFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* After tomb is fully dismissed */
+.footer-thanks.tomb-gone .hidden-mosaic {
+    position: absolute;
+    inset: 0;
+    pointer-events: auto;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .hidden-mosaic {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+    }
+
 }
 
 /* ======================

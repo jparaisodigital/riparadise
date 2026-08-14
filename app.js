@@ -701,7 +701,7 @@ function renderCartDrawer() {
         }
         
         // ======================
-        // FOOTER THANK YOU (chapters.html — tombstone rubbing)
+        // FOOTER THANK YOU (chapters.html — tombstone rubbing + hidden archive)
         // ======================
         function renderFooterThanks() {
             const section = document.getElementById('footer-thanks');
@@ -709,7 +709,6 @@ function renderCartDrawer() {
             
             const cfg = CONFIG.footerThanks;
             
-            // ON/OFF switch
             if (cfg.enabled === false) {
                 section.style.display = 'none';
                 return;
@@ -724,9 +723,60 @@ function renderCartDrawer() {
             ftMessageEl.innerHTML = lines.map(line => `<span class="ft-line">${line}</span>`).join('');
             document.getElementById('ft-signature').textContent = cfg.signature;
             
+            // ---- Build hidden mosaic (reuse CONFIG.gallery) ----
+            const hiddenEnabled = CONFIG.hiddenGallery && CONFIG.hiddenGallery.enabled;
+            const mosaicEl = document.getElementById('hidden-mosaic');
+            const dimEl = document.getElementById('dim-overlay');
+            const arrowBtn = document.getElementById('reveal-arrow');
+            
+            if (hiddenEnabled && mosaicEl && CONFIG.hiddenGallery.images && CONFIG.hiddenGallery.images.length) {
+                if (dimEl && typeof CONFIG.hiddenGallery.dimOpacity === 'number') {
+                    dimEl.style.background = `rgba(0, 0, 0, ${CONFIG.hiddenGallery.dimOpacity})`;
+                }
+                
+                const imgs = CONFIG.hiddenGallery.images;
+                
+                mosaicEl.innerHTML = imgs.map((src, i) => `
+                    <div class="gallery-item" data-index="${i}">
+                        <img src="${src}" alt="Gem ${i + 1}" loading="lazy" />
+                    </div>
+                `).join('');
+                
+                mosaicEl.querySelectorAll('.gallery-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        // Unang click/tap sa litrato = alisin muna ang tomb
+                        if (!section.classList.contains('tomb-gone')) {
+                            section.classList.add('tomb-gone');
+                            section.style.backgroundImage = 'none';
+                            return;
+                        }
+                        // Sunod na click (tomb gone na) = buksan ang litrato
+                        const idx = parseInt(el.dataset.index, 10);
+                        openGalleryLightbox(imgs[idx]);
+                    });
+                });
+            }
+            
+            // ---- Arrow: permanent hide tomb ----
+            if (hiddenEnabled && arrowBtn) {
+                arrowBtn.hidden = false; // element exists; visibility controlled by CSS class
+                
+                arrowBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!section.classList.contains('revealed')) return;
+                    section.classList.add('tomb-gone');
+                    // Optional: remove original background so mosaic is pure
+                    section.style.backgroundImage = 'none';
+                });
+            }
+            
+            // ---- Canvas rubbing ----
             const canvas = document.getElementById('ft-canvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
+            
+            let revealed = false;
+            const threshold = (CONFIG.hiddenGallery && CONFIG.hiddenGallery.rubThreshold) || 60;
             
             function sizeCanvas() {
                 const rect = canvas.getBoundingClientRect();
@@ -734,7 +784,6 @@ function renderCartDrawer() {
                 canvas.height = Math.round(rect.height);
             }
             
-            // Noise fallback 
             function paintNoiseFallback() {
                 ctx.globalCompositeOperation = 'source-over';
                 ctx.fillStyle = '#87857f';
@@ -748,7 +797,6 @@ function renderCartDrawer() {
                 }
             }
             
-            // Cover-fit crop 
             function drawCoverImage(img) {
                 const cw = canvas.width, ch = canvas.height;
                 const ir = img.width / img.height;
@@ -782,20 +830,35 @@ function renderCartDrawer() {
             
             function paintOrClear() {
                 sizeCanvas();
-                paintCover();  
+                paintCover();
             }
             paintOrClear();
             window.addEventListener('resize', paintOrClear);
             
             let drawing = false;
             let last = null;
-            let rubbed = false;
             
             function pos(e) {
                 const rect = canvas.getBoundingClientRect();
                 const cx = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
                 const cy = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
                 return { x: cx * (canvas.width / rect.width), y: cy * (canvas.height / rect.height) };
+            }
+            
+            function checkRubProgress() {
+                if (revealed || !hiddenEnabled) return;
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                let transparentPixels = 0;
+                for (let i = 3; i < data.length; i += 4) {
+                    if (data[i] === 0) transparentPixels++;
+                }
+                const rubPercentage = (transparentPixels / (canvas.width * canvas.height)) * 100;
+                
+                if (rubPercentage >= threshold) {
+                    revealed = true;
+                    section.classList.add('revealed');
+                }
             }
             
             function rub(p) {
@@ -817,15 +880,17 @@ function renderCartDrawer() {
                 }
                 ctx.globalAlpha = 1;
                 last = p;
-                rubbed = true;
+                
+                // Throttle the expensive pixel check a bit
+                if (!rub._lastCheck || Date.now() - rub._lastCheck > 180) {
+                    rub._lastCheck = Date.now();
+                    checkRubProgress();
+                }
             }
             
             function start(e) { drawing = true; last = null; rub(pos(e)); e.preventDefault(); }
             function move(e) { if (!drawing) return; rub(pos(e)); e.preventDefault(); }
-            function end() {
-                drawing = false;
-                last = null;
-            }
+            function end() { drawing = false; last = null; }
             
             canvas.addEventListener('mousedown', start);
             canvas.addEventListener('mousemove', move);
@@ -834,6 +899,55 @@ function renderCartDrawer() {
             canvas.addEventListener('touchmove', move, { passive: false });
             canvas.addEventListener('touchend', end);
         }
+        
+        // ======================
+        // TOMB DISMISS — click/tap kahit saan sa loob ng revealed section
+        // ======================
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('footer-thanks');
+            if (!section) return;
+            
+            let lastRubEnd = 0;
+            window.addEventListener('mouseup',  () => { lastRubEnd = Date.now(); });
+            window.addEventListener('touchend', () => { lastRubEnd = Date.now(); });
+            
+            function dismissTomb() {
+                if (!section.classList.contains('revealed')) return;
+                if (section.classList.contains('tomb-gone')) return;
+                section.classList.add('tomb-gone');
+                section.style.backgroundImage = 'none';
+            }
+            
+            // Click sa background/mosaic (labas ng tombstone) → dismiss
+            section.addEventListener('click', (e) => {
+                if (e.target.closest('#reveal-arrow')) return;
+                if (e.target.closest('#ft-canvas')) return; // sariling tap-handler ito sa baba
+                if (Date.now() - lastRubEnd < 450) return;
+                dismissTomb();
+            });
+            
+            // Tap mismo sa tombstone — pero "tap" lang, hindi habang nag-ru-rub/drag
+            const canvas = document.getElementById('ft-canvas');
+            if (canvas) {
+                let downPos = null;
+                let dragMoved = false;
+                
+                canvas.addEventListener('pointerdown', (e) => {
+                    downPos = { x: e.clientX, y: e.clientY };
+                    dragMoved = false;
+                });
+                canvas.addEventListener('pointermove', (e) => {
+                    if (!downPos) return;
+                    const dx = e.clientX - downPos.x;
+                    const dy = e.clientY - downPos.y;
+                    if (Math.sqrt(dx * dx + dy * dy) > 6) dragMoved = true;
+                });
+                canvas.addEventListener('pointerup', () => {
+                    if (!dragMoved) dismissTomb();
+                    downPos = null;
+                });
+            }
+        });
         
         // ======================
         // SCROLL TO TOP BUTTON - CHAPTERS
