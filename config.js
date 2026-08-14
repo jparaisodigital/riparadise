@@ -45,8 +45,7 @@ const CONFIG = {
         "assets/main/3.png",
         "assets/main/4.png",
         "assets/main/5.png",
-        "assets/main/6.png",
-        "assets/main/7.png"
+        "assets/main/6.png"
     ],
     
     // Shop Now button under the slides
@@ -181,7 +180,7 @@ const CONFIG = {
             name: "Fitsmits Tee",
             price: 1000,
             image: "assets/products/1.png",        
-            imageHover: "assets/products/bb.png",  
+            imageHover: "assets/products/back1.png",  
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
             sizes: ["S", "M", "L", "XL"],
             soldOut: false
