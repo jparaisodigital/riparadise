@@ -3390,67 +3390,184 @@ STORE FOOTER — COPYRIGHT + SOCIALS
 
 }
 
-/* ==========================================================
-   RIP SIGN (on the ground line)
-========================================================== */
+/* ----------------------------------------------------------
+   RIP + 1210 TRACK SIGNS
+---------------------------------------------------------- */
 
-.rip-sign {
+.track-signs {
     position: absolute;
     right: 8%;
-    top: -10px;                 
-    width: 24px;
+    top: -10px;
+
+    width: 58px;
     height: 30px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
     z-index: 3;
 }
 
+
+/* ----------------------------------------------------------
+   RIP SIGN
+---------------------------------------------------------- */
+
+.rip-sign {
+    position: relative;
+
+    width: 24px;
+    height: 30px;
+
+    flex-shrink: 0;
+}
+
+
+/* RIP BOARD */
+
 .rip-sign span {
     position: absolute;
+
     left: 0;
     top: 0;
+
     width: 22px;
     height: 18px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     background: var(--text);
     color: var(--bg);
+
     font-family: monospace;
     font-size: 7px;
     font-weight: 700;
     letter-spacing: -0.04em;
+
     line-height: 1;
 }
 
+
+/* RIP POST */
+
 .rip-sign::before {
     content: "";
+
     position: absolute;
+
     left: 10px;
     top: 18px;
+
     width: 1px;
     height: 12px;
+
     background: var(--text);
 }
+
+
+/* RIP BASE */
 
 .rip-sign::after {
     content: "";
+
     position: absolute;
+
     left: 4px;
     bottom: 0;
+
     width: 13px;
     height: 1px;
+
     background: var(--text);
 }
 
-/* Tiny crooked flag */
-.rip-sign i {
+
+/* ----------------------------------------------------------
+   1210 SIGN
+---------------------------------------------------------- */
+
+.sign-1210 {
+    position: relative;
+
+    width: 26px;
+    height: 30px;
+
+    flex-shrink: 0;
+}
+
+
+/* 1210 BOARD */
+
+.sign-1210 span {
     position: absolute;
-    left: 20px;
-    top: 2px;
-    width: 9px;
-    height: 5px;
-    border-top: 1px solid var(--text);
-    border-right: 1px solid var(--text);
-    transform: skewY(-12deg);
+
+    left: 0;
+    top: 0;
+
+    width: 25px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--text);
+    color: var(--bg);
+
+    border: none;
+
+    font-family: monospace;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+
+    line-height: 1;
+}
+
+
+/* 1210 POST */
+
+.sign-1210::before {
+    content: "";
+
+    position: absolute;
+
+    left: 12px;
+    top: 18px;
+
+    width: 1px;
+    height: 12px;
+
+    background: var(--text);
+}
+
+
+/* 1210 BASE */
+
+.sign-1210::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+    bottom: 0;
+
+    width: 13px;
+    height: 1px;
+
+    background: var(--text);
+}
+
+
+/* Tiny crooked detail */
+
+.sign-1210 i {
+    position: absolute;
+
+    display: none;
 }
 
 /* ==========================================================
@@ -3584,12 +3701,10 @@ STORE FOOTER — COPYRIGHT + SOCIALS
         transform: scale(0.78);
     }
 
-    .rip-sign {
+    .track-signs {
         right: 5%;
-
         transform: scale(0.85);
-
-        transform-origin: bottom center;
+        transform-origin: bottom right;
     }
 
 }
