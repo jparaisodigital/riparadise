@@ -3692,8 +3692,8 @@ STORE FOOTER — COPYRIGHT + SOCIALS
     }
 
     .skater-track {
-        left: 3%;
-        right: 3%;
+        left: 0;          
+        right: 0;         
     }
 
     .skater {
