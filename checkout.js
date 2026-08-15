@@ -248,11 +248,6 @@ function renderCheckoutSummary() {
             
             showSuccess(order);
             
-            // Both COD and GCash → auto open Messenger with pre-filled details
-            const delay = isCod ? 900 : 2200; 
-            setTimeout(() => {
-                goToMessengerWithOrder(order);
-            }, delay);
         }
         
         // ======================
@@ -361,31 +356,35 @@ function renderCheckoutSummary() {
         function showSuccess(order) {
             document.getElementById('success-order-num').textContent = 'Order No. ' + order.number;
             document.getElementById('success-total').textContent =
-            'Total: ' + formatPrice(order.total) + ' — ' + order.payment.toUpperCase();
-            
+                'Total: ' + formatPrice(order.total) + ' — ' + order.payment.toUpperCase();
+        
             currentOrderPayment = order.payment;
-            resetMessengerButton();
-            
+        
             const instructions = document.getElementById('success-instructions');
             const messengerBtn = document.getElementById('success-messenger-btn');
-            
+        
             if (order.payment === 'cod') {
                 instructions.innerHTML =
-                'We copied your order details and opened Messenger for you — just paste and send to confirm your same-day delivery.';
-                if (messengerBtn) messengerBtn.style.display = 'none';
+                    'We prepared your order details. Tap the button below to open Messenger and send them to confirm your same-day delivery.';
             } else {
                 // GCash
                 const method = CONFIG.payments.find(p => p.id === order.payment);
                 instructions.innerHTML = `
                     <img src="${method.qr}" alt="${method.label} QR" class="success-qr" />
                     <p style="margin-top:14px; line-height:1.5;">
-                        Redirecting you to Messenger…<br>
-                        Your order details are ready — attach your GCash receipt and send.
+                        Scan & pay via GCash, then tap the button below to open Messenger<br>
+                        and send your receipt + order details.
                     </p>
                 `;
-                if (messengerBtn) messengerBtn.style.display = 'none'; // auto-redirect na
             }
-            
+        
+            // Always show the button (this is the reliable way on mobile)
+            if (messengerBtn) {
+                messengerBtn.style.display = 'block';
+                messengerBtn.textContent = 'Open Messenger & Send Details';
+                messengerBtn.onclick = () => goToMessengerWithOrder(order);
+            }
+        
             document.getElementById('order-success').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -411,11 +410,56 @@ function renderCheckoutSummary() {
             return lines.join('\n');
         }
         
+        // ======================
+        // MESSENGER REDIRECT
+        // ======================
         function goToMessengerWithOrder(order) {
             const text = buildOrderDetailsText(order);
             const baseUrl = (CONFIG.messenger && CONFIG.messenger.url) || 'https://m.me/100063752149428';
             const url = baseUrl + '?text=' + encodeURIComponent(text);
-            window.open(url, '_blank');
+            
+            // Prefer location.href on mobile (more reliable than window.open)
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                window.location.href = url;          // navigates to Messenger
+            } else {
+                window.open(url, '_blank');          // desktop: new tab
+            }
+        }
+        
+        function buildOrderDetailsText(order) {
+            const lines = [];
+            lines.push('Order ' + order.number);
+            lines.push('');
+            
+            order.items.forEach(item => {
+                lines.push('- ' + item.name + ' (Size: ' + item.size + ') x' + item.qty + ' — ' + formatPrice(item.price * item.qty));
+            });
+            
+            lines.push('');
+            lines.push('Subtotal: ' + formatPrice(order.subtotal));
+            
+            if (order.payment === 'cod') {
+                lines.push('Payment: Same day delivery (Cash on delivery)');
+                lines.push('Delivery: Same-day via Lalamove / Grab Express');
+            } else {
+                lines.push('Payment: GCash');
+                lines.push('Shipping: ' + formatPrice(order.shipping));
+                lines.push('Total: ' + formatPrice(order.total));
+                lines.push('');
+                lines.push('(Please attach GCash receipt)');
+            }
+            
+            lines.push('');
+            lines.push('Name: ' + order.customer.firstName + ' ' + order.customer.lastName);
+            lines.push('Address: ' + order.customer.address);
+            lines.push('Phone: ' + order.customer.phone);
+            if (order.customer.region) {
+                lines.push('Region: ' + order.customer.region);
+            }
+            
+            return lines.join('\n');
         }
         
         // ======================
