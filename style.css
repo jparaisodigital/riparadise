@@ -2090,8 +2090,8 @@ FOOTER THANK YOU (tombstone rubbing)
 }
 
 /* ==========================================================
-   TOMBSTONE REVEAL — HIDDEN PHOTO MOSAIC
-   RESTORED FROM OLD WORKING VERSION
+TOMBSTONE REVEAL — HIDDEN PHOTO MOSAIC
+RESTORED FROM OLD WORKING VERSION
 ========================================================== */
 
 .footer-thanks.tomb-gone {
@@ -2108,26 +2108,26 @@ FOOTER THANK YOU (tombstone rubbing)
     position: absolute;
     inset: 0;
     z-index: 0;
-
+    
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(6, 1fr);
-
+    
     gap: 0;
-
+    
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-
+    
     transform: scale(1.04);
-
+    
     transition:
-        opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 1.4s ease,
-        transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
-
+    opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 1.4s ease,
+    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    
     background: #fff;
-
+    
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -2155,12 +2155,12 @@ FOOTER THANK YOU (tombstone rubbing)
     height: 100%;
     object-fit: cover;
     display: block;
-
+    
     transform: scale(1.02);
-
+    
     transition:
-        transform 0.35s ease,
-        filter 0.3s ease;
+    transform 0.35s ease,
+    filter 0.3s ease;
 }
 
 /* Photo hover */
@@ -2174,9 +2174,9 @@ TOMB SLIDE-DOWN DISMISS (click/tap sa collage after reveal)
 ========================================================== */
 .ft-content {
     transition:
-        transform 1s cubic-bezier(0.55, 0, 0.55, 1),
-        opacity 0.75s ease,
-        visibility 0s linear 1s;
+    transform 1s cubic-bezier(0.55, 0, 0.55, 1),
+    opacity 0.75s ease,
+    visibility 0s linear 1s;
 }
 .footer-thanks.tomb-gone .ft-content {
     transform: translateY(60vh);
@@ -2196,15 +2196,15 @@ TOMB SLIDE-DOWN DISMISS (click/tap sa collage after reveal)
 }
 
 /* ==========================================================
-   STAGGERED PHOTO REVEAL
+STAGGERED PHOTO REVEAL
 ========================================================== */
 
 .footer-thanks.revealed .hidden-mosaic .gallery-item {
     animation:
-        gemFadeIn
-        0.9s
-        cubic-bezier(0.22, 1, 0.36, 1)
-        both;
+    gemFadeIn
+    0.9s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
 .footer-thanks.revealed
@@ -2266,7 +2266,7 @@ TOMB SLIDE-DOWN DISMISS (click/tap sa collage after reveal)
         opacity: 0;
         transform: scale(1.06);
     }
-
+    
     to {
         opacity: 1;
         transform: scale(1);
@@ -2282,12 +2282,12 @@ TOMB SLIDE-DOWN DISMISS (click/tap sa collage after reveal)
 
 /* Mobile */
 @media (max-width: 700px) {
-
+    
     .hidden-mosaic {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(12, 1fr);
     }
-
+    
 }
 
 /* ======================
@@ -2825,4 +2825,771 @@ STORE FOOTER — COPYRIGHT + SOCIALS
         width: 15px;
         height: 15px;
     }
+}
+
+/* ==========================================================
+   R.I.PARADISE — SKELETON SKATEBOARDER SEPARATOR
+   Tiny retro web easter egg
+========================================================== */
+
+.skater-separator {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+
+    height: 82px;
+
+    overflow: hidden;
+
+    background: var(--bg);
+}
+
+
+/* ==========================================================
+   TRACK
+========================================================== */
+
+.skater-track {
+    position: absolute;
+    left: 0;               
+    right: 0;             
+    top: 50%;
+    height: 30px;
+    transform: translateY(-50%);
+}
+
+
+/* ==========================================================
+   GROUND LINE
+========================================================== */
+
+.skater-track::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 20px;
+
+    height: 1px;
+
+    background: var(--text);
+
+    opacity: 0.7;
+}
+
+
+/* ==========================================================
+   SKELETON SKATER CONTAINER
+   (skater-bob binago sa skater-motion — 11s na siya ngayon,
+   kasabay ng skater-travel, para ma-time natin ang ollie)
+========================================================== */
+
+.skater {
+    position: absolute;
+
+    left: -50px;
+    top: -3px;
+
+    width: 50px;
+    height: 36px;
+
+    z-index: 5;
+
+    animation:
+        skater-travel 11s linear infinite,
+        skater-motion 11s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   SVG
+========================================================== */
+
+.skater-svg {
+    width: 50px;
+    height: 36px;
+
+    overflow: visible;
+}
+
+
+/* ==========================================================
+   GLOBAL SKELETON LINE STYLE
+========================================================== */
+
+.skater-svg path,
+.skater-svg circle {
+    fill: none;
+
+    stroke: var(--text);
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    vector-effect: non-scaling-stroke;
+}
+
+
+/* ==========================================================
+   SKULL (di na kailangan galawin, subtle na siya at okay lang
+   na iba ang loop niya sa buong body)
+========================================================== */
+
+.skeleton-skull {
+    transform-box: fill-box;
+    transform-origin: center bottom;
+
+    animation:
+        skull-bob 1.15s ease-in-out infinite;
+}
+
+
+/* Skull outline */
+
+.skull-shape {
+    fill: var(--bg);
+
+    stroke: var(--text);
+
+    stroke-width: 1.8;
+}
+
+
+/* Eye sockets */
+
+.skull-eye {
+    fill: var(--text);
+
+    stroke: none;
+}
+
+
+/* Nose */
+
+.skull-nose {
+    fill: var(--text);
+
+    stroke: none;
+}
+
+
+/* Jaw */
+
+.skull-jaw {
+    stroke-width: 1.3;
+}
+
+
+/* ==========================================================
+   SPINE
+========================================================== */
+
+.skeleton-spine {
+    transform-origin: 36px 25px;
+
+    animation:
+        skeleton-body 11s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   RIBS (subtle idle lang pa rin, hindi kailangan i-sync)
+========================================================== */
+
+.skeleton-ribs {
+    transform-box: fill-box;
+    transform-origin: center center;
+
+    animation:
+        ribs-movement 1.15s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+
+
+/* ==========================================================
+   ARMS
+========================================================== */
+
+.skeleton-arm {
+    transform-origin: 38px 16px;
+}
+
+
+/* Back arm */
+
+.skeleton-arm-back {
+    animation:
+        arm-back-swing
+        11s
+        ease-in-out
+        infinite;
+}
+
+
+/* Front arm */
+
+.skeleton-arm-front {
+    animation:
+        arm-front-swing
+        11s
+        ease-in-out
+        infinite;
+}
+
+
+/* ==========================================================
+   LEGS
+========================================================== */
+
+.skeleton-leg {
+    transform-origin: 36px 25px;
+}
+
+
+/* Back leg */
+
+.skeleton-leg-back {
+    animation:
+        leg-back-motion
+        11s
+        ease-in-out
+        infinite;
+}
+
+
+/* Front leg */
+
+.skeleton-leg-front {
+    animation:
+        leg-front-motion
+        11s
+        ease-in-out
+        infinite;
+}
+
+
+/* ==========================================================
+   SKATEBOARD
+========================================================== */
+
+.skateboard-deck {
+    stroke-width: 2.2 !important;
+
+    transform-box: fill-box;
+    transform-origin: center center;
+
+    animation:
+        board-tilt
+        11s
+        ease-in-out
+        infinite;
+}
+
+
+.skateboard-wheel {
+    fill: var(--text) !important;
+
+    stroke: none !important;
+}
+
+
+/* ==========================================================
+   SKATER TRAVEL
+========================================================== */
+
+@keyframes skater-travel {
+
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: calc(100% + 20px);
+    }
+
+}
+
+
+/* ==========================================================
+   WHOLE BODY MOTION
+   0–80%: subtle idle bob lang (parang naglalayag)
+   84–100%: ollie — crouch, pop, peak, land
+   (malapit na siya sa RIP sign dito, based sa position mo)
+========================================================== */
+
+@keyframes skater-motion {
+
+    0%   { transform: translateY(0); }
+    8%   { transform: translateY(-1px); }
+    16%  { transform: translateY(0); }
+    24%  { transform: translateY(-1px); }
+    32%  { transform: translateY(0); }
+    40%  { transform: translateY(-1px); }
+
+    /* CROUCH (anticipation) */
+    44%  { transform: translateY(2px); }
+
+    /* POP (ollie launch, peak height) */
+    48%  { transform: translateY(-14px); }
+
+    /* AIRBORNE, descending */
+    52%  { transform: translateY(-8px); }
+
+    /* LANDING (slight compress) */
+    56%  { transform: translateY(1px); }
+
+    60%  { transform: translateY(0); }
+    68%  { transform: translateY(-1px); }
+    76%  { transform: translateY(0); }
+    84%  { transform: translateY(-1px); }
+    92%  { transform: translateY(0); }
+    100% { transform: translateY(0); }
+
+}
+
+
+/* ==========================================================
+   SKULL MICRO MOVEMENT
+========================================================== */
+
+@keyframes skull-bob {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(2deg);
+    }
+
+    25% {
+        transform: translateY(0.4px) rotate(3deg);
+    }
+
+    42% {
+        transform: translateY(1px) rotate(5deg);
+    }
+
+    60% {
+        transform: translateY(0) rotate(2deg);
+    }
+
+    80% {
+        transform: translateY(-0.2px) rotate(0deg);
+    }
+
+}
+
+
+/* ==========================================================
+   SPINE / BODY LEAN
+   idle lang, tapos konting coil bago mag-pop
+========================================================== */
+
+@keyframes skeleton-body {
+
+    0%   { transform: rotate(2deg); }
+    10%  { transform: rotate(3deg); }
+    20%  { transform: rotate(2deg); }
+    30%  { transform: rotate(3deg); }
+    40%  { transform: rotate(2deg); }
+
+    /* CROUCH (coiling before pop) */
+    44%  { transform: rotate(6deg); }
+
+    /* LAUNCH (extending/straightening) */
+    48%  { transform: rotate(-2deg); }
+
+    52%  { transform: rotate(0deg); }
+
+    /* LANDING (absorb) */
+    56%  { transform: rotate(4deg); }
+
+    60%  { transform: rotate(2deg); }
+    70%  { transform: rotate(3deg); }
+    80%  { transform: rotate(2deg); }
+    90%  { transform: rotate(3deg); }
+    100% { transform: rotate(2deg); }
+
+}
+
+
+/* ==========================================================
+   RIB CAGE MOVEMENT
+========================================================== */
+
+@keyframes ribs-movement {
+
+    0%,
+    100% {
+        transform: rotate(2deg);
+    }
+
+    35% {
+        transform: rotate(5deg) translateY(0.5px);
+    }
+
+    55% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(0deg);
+    }
+
+}
+
+
+/* ==========================================================
+   BACK LEG
+   idle micro-sway lang, tapos tumutuck papataas
+   habang naka-ere sa ollie
+========================================================== */
+
+@keyframes leg-back-motion {
+
+    0%   { transform: rotate(-3deg); }
+    10%  { transform: rotate(1deg); }
+    20%  { transform: rotate(-3deg); }
+    30%  { transform: rotate(1deg); }
+    40%  { transform: rotate(-3deg); }
+
+    /* CROUCH */
+    44%  { transform: rotate(8deg); }
+
+    /* TUCK (airborne, knee bent up) */
+    48%  { transform: rotate(34deg); }
+
+    52%  { transform: rotate(30deg); }
+
+    /* EXTEND FOR LANDING */
+    56%  { transform: rotate(-4deg); }
+
+    60%  { transform: rotate(-3deg); }
+    70%  { transform: rotate(1deg); }
+    80%  { transform: rotate(-3deg); }
+    90%  { transform: rotate(1deg); }
+    100% { transform: rotate(-3deg); }
+
+}
+
+
+/* ==========================================================
+   FRONT LEG
+========================================================== */
+
+@keyframes leg-front-motion {
+
+    0%   { transform: rotate(2deg); }
+    10%  { transform: rotate(-1deg); }
+    20%  { transform: rotate(2deg); }
+    30%  { transform: rotate(-1deg); }
+    40%  { transform: rotate(2deg); }
+
+    44%  { transform: rotate(-6deg); }
+
+    48%  { transform: rotate(-28deg); }
+
+    52%  { transform: rotate(-24deg); }
+
+    56%  { transform: rotate(3deg); }
+
+    60%  { transform: rotate(2deg); }
+    70%  { transform: rotate(-1deg); }
+    80%  { transform: rotate(2deg); }
+    90%  { transform: rotate(-1deg); }
+    100% { transform: rotate(2deg); }
+
+}
+
+
+/* ==========================================================
+   BACK ARM
+   idle sway, tapos konting balance-raise habang naka-ere
+========================================================== */
+
+@keyframes arm-back-swing {
+
+    0%   { transform: rotate(3deg); }
+    12%  { transform: rotate(-2deg); }
+    24%  { transform: rotate(3deg); }
+    36%  { transform: rotate(-2deg); }
+
+    44%  { transform: rotate(-8deg); }
+
+    48%  { transform: rotate(10deg); }
+
+    52%  { transform: rotate(6deg); }
+
+    56%  { transform: rotate(-3deg); }
+
+    68%  { transform: rotate(3deg); }
+    80%  { transform: rotate(-2deg); }
+    92%  { transform: rotate(3deg); }
+    100% { transform: rotate(3deg); }
+
+}
+
+
+/* ==========================================================
+   FRONT ARM
+========================================================== */
+
+@keyframes arm-front-swing {
+
+    0%   { transform: rotate(-3deg); }
+    12%  { transform: rotate(2deg); }
+    24%  { transform: rotate(-3deg); }
+    36%  { transform: rotate(2deg); }
+
+    44%  { transform: rotate(8deg); }
+
+    48%  { transform: rotate(-10deg); }
+
+    52%  { transform: rotate(-6deg); }
+
+    56%  { transform: rotate(3deg); }
+
+    68%  { transform: rotate(-3deg); }
+    80%  { transform: rotate(2deg); }
+    92%  { transform: rotate(-3deg); }
+    100% { transform: rotate(-3deg); }
+
+}
+
+
+/* ==========================================================
+   BOARD TILT
+   idle lang, tapos "snap" ng nose habang nag-o-ollie
+========================================================== */
+
+@keyframes board-tilt {
+
+    0%,
+    100% { transform: rotate(0deg); }
+
+    15%  { transform: rotate(-0.5deg); }
+    30%  { transform: rotate(0.5deg); }
+    40%  { transform: rotate(0deg); }
+
+    /* NOSE DIPS (pre-pop) */
+    44%  { transform: rotate(-3deg); }
+
+    /* SNAP (ollie kick) */
+    48%  { transform: rotate(4deg); }
+
+    52%  { transform: rotate(2deg); }
+
+    /* SETTLE (landing) */
+    56%  { transform: rotate(-2deg); }
+
+    60%  { transform: rotate(0deg); }
+    80%  { transform: rotate(0.3deg); }
+    100% { transform: rotate(0deg); }
+
+}
+
+/* ==========================================================
+   RIP SIGN (on the ground line)
+========================================================== */
+
+.rip-sign {
+    position: absolute;
+    right: 8%;
+    top: -10px;                 
+    width: 24px;
+    height: 30px;
+    z-index: 3;
+}
+
+.rip-sign span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text);
+    color: var(--bg);
+    font-family: monospace;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.rip-sign::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 18px;
+    width: 1px;
+    height: 12px;
+    background: var(--text);
+}
+
+.rip-sign::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    bottom: 0;
+    width: 13px;
+    height: 1px;
+    background: var(--text);
+}
+
+/* Tiny crooked flag */
+.rip-sign i {
+    position: absolute;
+    left: 20px;
+    top: 2px;
+    width: 9px;
+    height: 5px;
+    border-top: 1px solid var(--text);
+    border-right: 1px solid var(--text);
+    transform: skewY(-12deg);
+}
+
+/* ==========================================================
+   GROUND DETAILS
+========================================================== */
+
+.ground-dust {
+    position: absolute;
+
+    top: 21px;
+
+    height: 1px;
+
+    background: var(--text);
+
+    opacity: 0.35;
+}
+
+
+.dust-1 {
+    left: 24%;
+    width: 12px;
+}
+
+
+.dust-2 {
+    left: 52%;
+    width: 5px;
+}
+
+
+.dust-3 {
+    left: 73%;
+    width: 9px;
+}
+
+.dust-1 {
+    left: 24%;
+    width: 12px;
+}
+
+
+.dust-2 {
+    left: 52%;
+    width: 5px;
+}
+
+
+.dust-3 {
+    left: 73%;
+    width: 9px;
+}
+
+
+.dust-4 {
+    left: 38%;
+    width: 7px;
+}
+
+
+.dust-5 {
+    left: 88%;
+    width: 6px;
+}
+
+
+/* Tiny pebble dots */
+
+.ground-pebble {
+    position: absolute;
+
+    top: 22px;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: var(--text);
+
+    opacity: 0.4;
+}
+
+
+.pebble-1 {
+    left: 15%;
+}
+
+
+.pebble-2 {
+    left: 63%;
+}
+
+
+/* Small crack in the ground */
+
+.ground-crack {
+    position: absolute;
+
+    top: 20px;
+    left: 44%;
+
+    width: 10px;
+    height: 1px;
+
+    background: var(--text);
+
+    opacity: 0.25;
+
+    transform: rotate(18deg);
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .skater-separator {
+        height: 62px;
+    }
+
+    .skater-track {
+        left: 3%;
+        right: 3%;
+    }
+
+    .skater {
+        transform-origin: center;
+        transform: scale(0.78);
+    }
+
+    .rip-sign {
+        right: 5%;
+
+        transform: scale(0.85);
+
+        transform-origin: bottom center;
+    }
+
 }

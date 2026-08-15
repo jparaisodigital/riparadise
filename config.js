@@ -3,7 +3,7 @@ const CONFIG = {
         name: "R.I.PARADISE",
         shortName: "",
         tagline: "Rest in Paradise",
-        logo: "assets/rip.jpg",
+        logo: "assets/rip1.png",
         year: 2026
     },
     
@@ -70,10 +70,10 @@ const CONFIG = {
             { year: "2026", text: "Current chapter" }
         ]
     },
-
-        lookbook: {
-            enabled: true,
-            images: [
+    
+    lookbook: {
+        enabled: true,
+        images: [
             "assets/lookbook/1 (1).png",
             "assets/lookbook/1 (2).png",
             "assets/lookbook/1 (3).png",
@@ -81,13 +81,12 @@ const CONFIG = {
             "assets/lookbook/1 (5).png",
             "assets/lookbook/1 (6).png",
             "assets/lookbook/1 (7).png",
-            "assets/lookbook/1 (8).png",
-            "assets/lookbook/1 (9).png",
-            "assets/lookbook/1 (10).png"
+            "assets/lookbook/1 (8).png"
+            
         ]
     },
     
-
+    
     // Hidden archive gallery (gems) — revealed by rubbing the tombstone
     hiddenGallery: {
         enabled: true,
@@ -144,7 +143,7 @@ const CONFIG = {
             "assets/gems/2 (25).webp"
         ]
     },
-
+    
     
     
     // Footer socials
@@ -173,16 +172,17 @@ const CONFIG = {
     },
     
     // 4 Products only
+
     products: [
         
         {
             id: "p1",
             name: "Fitsmits Tee",
             price: 1000,
-            image: "assets/products/1.png",        
-            imageHover: "assets/products/back1.png",  
+            image: "assets/products/1.png",
+            imageHover: "assets/products/back1.png",
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
-            sizes: ["S", "M", "L", "XL"],
+            sizes: ["S", "M", "L"],
             soldOut: false
         },
         
@@ -190,8 +190,8 @@ const CONFIG = {
             id: "p2",
             name: "Fitsmits Tee",
             price: 1000,
-            image: "assets/products/2.png",       
-            imageHover: "assets/products/back2.png",  
+            image: "assets/products/2.png",
+            imageHover: "assets/products/back2.png",
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
             sizes: ["S", "M", "L", "XL"],
             soldOut: false
@@ -201,10 +201,10 @@ const CONFIG = {
             id: "p3",
             name: "Riparadise x 1210 Logo Tee",
             price: 1000,
-            image: "assets/products/3.png",        
-            imageHover: "assets/products/back3.png",  
+            image: "assets/products/3.png",
+            imageHover: "assets/products/back3.png",
             description: "Heavy Cotton. Oversized Fitting. Reflective.",
-            sizes: ["S", "M", "L", "XL"],
+            sizes: ["M", "L", "XL"],
             soldOut: false
         },
         
@@ -212,13 +212,15 @@ const CONFIG = {
             id: "p4",
             name: "Fitsmits Hoodie",
             price: 2200,
-            image: "assets/products/4.png",       
-            imageHover: "assets/products/back4.png", 
+            image: "assets/products/4.png",
+            imageHover: "assets/products/back4.png",
             description: "Heavy Cotton. 300GSM. Backprint. In collaboration w/ 1210",
-            sizes: ["L", "XL", "2XL"],
+            sizes: ["L", "XL"],
             soldOut: false
         },
+        
     ],
+    
     
     
     // Size chart data (for modal)
@@ -348,9 +350,9 @@ const CONFIG = {
         { image: "assets/1 (73).png", size: "small" }
     ],
     
-
-     // sa config.js
-     chaptersMedia: {
+    
+    // sa config.js
+    chaptersMedia: {
         instagramEmbed: "https://www.instagram.com/reel/DC89_V_TNmc/", 
         image: "assets/ig.png",
         imageAlt: "R.I.PARADISE"

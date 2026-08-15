@@ -40,92 +40,308 @@
         <!-- PRODUCTS FIRST -->
         <div class="product-grid" id="product-grid"></div>
         
-        <!-- LOOKBOOK SECTION (Moved after products) -->
-        <section class="lookbook" id="lookbook">
-            <div class="lookbook-hero" id="lookbook-hero"></div>
-            <div class="lookbook-grid" id="lookbook-grid"></div>
-        </section>
-    </main>
-    
-    <footer class="site-footer">
-        <div class="footer-copy" id="footer-copy"></div>
-        <div class="socials" id="socials"></div>
-    </footer>
-    
-    <!-- ====================== -->
-    <!-- PRODUCT DETAIL MODAL   -->
-    <!-- ====================== -->
-    <div class="modal-overlay" id="product-modal">
-        <div class="modal product-modal">
-            <button class="modal-close" id="product-modal-close">×</button>
+        <!-- ====================== -->
+        <!-- SKELETON SKATEBOARDER SEPARATOR -->
+        <!-- ====================== -->
+        <section class="skater-separator" aria-hidden="true">
             
-            <div class="product-detail">
-                <div class="product-detail-image">
-                    <img id="pd-image" src="" alt="" />
+            <div class="skater-track">
+                
+                <!-- Small ground texture -->
+                <span class="ground-dust dust-1"></span>
+                <span class="ground-dust dust-2"></span>
+                <span class="ground-dust dust-3"></span>
+                <span class="ground-dust dust-4"></span>
+                <span class="ground-dust dust-5"></span>
+                <span class="ground-pebble pebble-1"></span>
+                <span class="ground-pebble pebble-2"></span>
+                <span class="ground-crack"></span>
+                
+                <!-- RIP sign -->
+                <div class="rip-sign">
+                    <span>RIP</span>
+                    <i></i>
                 </div>
                 
-                <div class="product-detail-info">
-                    <div class="pd-brand" id="pd-brand"></div>
-                    <h2 class="pd-name" id="pd-name"></h2>
-                    <div class="pd-price" id="pd-price"></div>
+                <!-- Skeleton Skater -->
+                <div class="skater">
                     
-                    <div class="pd-size-wrapper">
-                        <select id="pd-size" class="pd-size">
-                            <!-- sizes rendered by JS -->
-                        </select>
-                    </div>
+                    <svg
+                    class="skater-svg"
+                    viewBox="0 0 70 50"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
                     
-                    <button class="pd-add-to-cart" id="pd-add-to-cart">ADD TO CART</button>
+                    <!-- ===================== -->
+                    <!-- SKULL -->
+                    <!-- ===================== -->
                     
-                    <button class="pd-size-chart-btn" id="pd-size-chart-btn">Size Chart</button>
+                    <g class="skeleton-skull">
+                        
+                        <!-- Skull -->
+                        <path
+                        class="skull-shape"
+                        d="
+                        M40 3
+                        C36.8 3 34.5 5.2 34.5 8
+                        C34.5 10.1 35.5 11.7 37.2 12.7
+                        L37.2 15
+                        L42.8 15
+                        L42.8 12.7
+                        C44.5 11.7 45.5 10.1 45.5 8
+                        C45.5 5.2 43.2 3 40 3
+                        Z
+                        "
+                        />
+                        
+                        <!-- Eye sockets -->
+                        <circle
+                        class="skull-eye skull-eye-left"
+                        cx="37.5"
+                        cy="8"
+                        r="1"
+                        />
+                        
+                        <circle
+                        class="skull-eye skull-eye-right"
+                        cx="42.5"
+                        cy="8"
+                        r="1"
+                        />
+                        
+                        <!-- Nose -->
+                        <path
+                        class="skull-nose"
+                        d="M40 9 L39.2 10.5 L40.8 10.5 Z"
+                        />
+                        
+                        <!-- Jaw -->
+                        <path
+                        class="skull-jaw"
+                        d="M37.2 12.7 L42.8 12.7"
+                        />
+                        
+                    </g>
                     
-                    <p class="pd-description" id="pd-description"></p>
-                </div>
+                    
+                    <!-- ===================== -->
+                    <!-- SPINE / BODY -->
+                    <!-- ===================== -->
+                    
+                    <path
+                    class="skeleton-spine"
+                    d="M40 15 L36 25"
+                    />
+                    
+                    
+                    <!-- Rib cage -->
+                    <g class="skeleton-ribs">
+                        
+                        <path
+                        d="M39 16 Q35 17 36 20"
+                        />
+                        
+                        <path
+                        d="M38 19 Q34 20 35 22"
+                        />
+                        
+                        <path
+                        d="M37 22 Q34 23 35 25"
+                        />
+                        
+                    </g>
+                    
+                    
+                    <!-- ===================== -->
+                    <!-- BACK ARM -->
+                    <!-- ===================== -->
+                    
+                    <g class="skeleton-arm skeleton-arm-back">
+                        
+                        <path d="M38 16 L30 20" />
+                        
+                        <path d="M30 20 L27 24" />
+                        
+                        <path
+                        class="skeleton-hand"
+                        d="M27 24 L26 25"
+                        />
+                        
+                    </g>
+                    
+                    
+                    <!-- ===================== -->
+                    <!-- FRONT ARM -->
+                    <!-- ===================== -->
+                    
+                    <g class="skeleton-arm skeleton-arm-front">
+                        
+                        <path d="M39 16 L47 19" />
+                        
+                        <path d="M47 19 L50 16" />
+                        
+                        <path
+                        class="skeleton-hand"
+                        d="M50 16 L51 15"
+                        />
+                        
+                    </g>
+                    
+                    
+                    <!-- ===================== -->
+                    <!-- BACK LEG / PUSH LEG -->
+                    <!-- ===================== -->
+                    
+                    <g class="skeleton-leg skeleton-leg-back">
+                        
+                        <path d="M36 25 L29 30" />
+                        
+                        <path d="M29 30 L23 37" />
+                        
+                        <path
+                        class="skeleton-foot"
+                        d="M23 37 L20 37"
+                        />
+                        
+                    </g>
+                    
+                    
+                    <!-- ===================== -->
+                    <!-- FRONT / PLANTED LEG -->
+                    <!-- ===================== -->
+                    
+                    <g class="skeleton-leg skeleton-leg-front">
+                        
+                        <path d="M36 25 L42 30" />
+                        
+                        <path d="M42 30 L44 36" />
+                        
+                        <path
+                        class="skeleton-foot"
+                        d="M44 36 L47 36"
+                        />
+                        
+                    </g>
+                    
+                    
+                    <!-- ===================== -->
+                    <!-- SKATEBOARD -->
+                    <!-- ===================== -->
+                    
+                    <path
+                    class="skateboard-deck"
+                    d="M19 37 Q35 39 51 37"
+                    />
+                    
+                    <!-- Wheels -->
+                    <circle
+                    class="skateboard-wheel wheel-back"
+                    cx="26"
+                    cy="40"
+                    r="1.8"
+                    />
+                    
+                    <circle
+                    class="skateboard-wheel wheel-front"
+                    cx="45"
+                    cy="40"
+                    r="1.8"
+                    />
+                    
+                </svg>
+                
             </div>
-        </div>
-    </div>
-    
-    <!-- ====================== -->
-    <!-- SIZE CHART MODAL       -->
-    <!-- ====================== -->
-    <div class="modal-overlay" id="size-modal">
-        <div class="modal size-modal">
-            <button class="modal-close" id="size-modal-close">×</button>
-            <h2 class="modal-title" id="size-modal-title"></h2>
             
-            <div class="modal-content">
-                <div class="size-chart-table-wrapper">
-                    <table class="size-chart-table" id="size-table"></table>
+        </div>
+        
+    </section>
+    
+    <!-- LOOKBOOK SECTION (Moved after products) -->
+    <section class="lookbook" id="lookbook">
+        <div class="lookbook-hero" id="lookbook-hero"></div>
+        <div class="lookbook-grid" id="lookbook-grid"></div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-copy" id="footer-copy"></div>
+    <div class="socials" id="socials"></div>
+</footer>
+
+<!-- ====================== -->
+<!-- PRODUCT DETAIL MODAL   -->
+<!-- ====================== -->
+<div class="modal-overlay" id="product-modal">
+    <div class="modal product-modal">
+        <button class="modal-close" id="product-modal-close">×</button>
+        
+        <div class="product-detail">
+            <div class="product-detail-image">
+                <img id="pd-image" src="" alt="" />
+            </div>
+            
+            <div class="product-detail-info">
+                <div class="pd-brand" id="pd-brand"></div>
+                <h2 class="pd-name" id="pd-name"></h2>
+                <div class="pd-price" id="pd-price"></div>
+                
+                <div class="pd-size-wrapper">
+                    <select id="pd-size" class="pd-size">
+                        <!-- sizes rendered by JS -->
+                    </select>
                 </div>
-                <div class="size-chart-image" id="size-chart-image"></div>
+                
+                <button class="pd-add-to-cart" id="pd-add-to-cart">ADD TO CART</button>
+                
+                <button class="pd-size-chart-btn" id="pd-size-chart-btn">Size Chart</button>
+                
+                <p class="pd-description" id="pd-description"></p>
             </div>
         </div>
     </div>
-    
-    <!-- ====================== -->
-    <!-- CART DRAWER            -->
-    <!-- ====================== -->
-    <div class="cart-overlay" id="cart-overlay"></div>
-    <aside class="cart-drawer" id="cart-drawer">
-        <div class="cart-drawer-header">
-            <span class="cart-drawer-title">CART</span>
-            <button class="cart-drawer-close" id="cart-drawer-close">×</button>
-        </div>
-        <div class="cart-items" id="cart-items"></div>
-        <div class="cart-footer">
-            <div class="cart-subtotal">
-                <span>SUBTOTAL</span>
-                <span id="cart-subtotal">—</span>
+</div>
+
+<!-- ====================== -->
+<!-- SIZE CHART MODAL       -->
+<!-- ====================== -->
+<div class="modal-overlay" id="size-modal">
+    <div class="modal size-modal">
+        <button class="modal-close" id="size-modal-close">×</button>
+        <h2 class="modal-title" id="size-modal-title"></h2>
+        
+        <div class="modal-content">
+            <div class="size-chart-table-wrapper">
+                <table class="size-chart-table" id="size-table"></table>
             </div>
-            <a href="checkout.html" class="cart-checkout-btn">CHECKOUT</a>
+            <div class="size-chart-image" id="size-chart-image"></div>
         </div>
-    </aside>
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-    
-    <script src="config.js"></script>
-    <script src="cart.js"></script>
-    <script src="app.js"></script>
+    </div>
+</div>
+
+<!-- ====================== -->
+<!-- CART DRAWER            -->
+<!-- ====================== -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+        <span class="cart-drawer-title">CART</span>
+        <button class="cart-drawer-close" id="cart-drawer-close">×</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer">
+        <div class="cart-subtotal">
+            <span>SUBTOTAL</span>
+            <span id="cart-subtotal">—</span>
+        </div>
+        <a href="checkout.html" class="cart-checkout-btn">CHECKOUT</a>
+    </div>
+</aside>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="cart.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
