@@ -76,11 +76,11 @@ const CONFIG = {
         images: [
             "assets/lookbook/1 (1).png",
             "assets/lookbook/1 (2).png",
-            "assets/lookbook/1 (3).png",
-            "assets/lookbook/1 (4).png",
-            "assets/lookbook/1 (5).png",
-            "assets/lookbook/1 (6).png",
-            "assets/lookbook/1 (7).png",
+            "assets/lookbook/1 (3).webp",
+            "assets/lookbook/1 (4).webp",
+            "assets/lookbook/1 (5).webp",
+            "assets/lookbook/1 (6).webp",
+            "assets/lookbook/1 (7).webp",
             "assets/lookbook/1 (8).png"
             
         ]
