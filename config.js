@@ -174,7 +174,7 @@ const CONFIG = {
     // 4 Products only
     
     products: [
-        
+    
         {
             id: "p1",
             name: "Fitsmits Tee",
@@ -182,7 +182,7 @@ const CONFIG = {
             image: "assets/products/1.png",
             imageHover: "assets/products/back1.png",
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
-            sizes: ["S", "M", "L"],
+            sizes: ["M", "L", "XL"],      
             soldOut: false
         },
         
@@ -193,7 +193,7 @@ const CONFIG = {
             image: "assets/products/2.png",
             imageHover: "assets/products/back2.png",
             description: "Heavy Cotton. Oversized Fitting. In collaboration w/ 1210",
-            sizes: ["S", "M", "L", "XL"],
+            sizes: ["S", "M", "L"],      
             soldOut: false
         },
         
@@ -204,7 +204,7 @@ const CONFIG = {
             image: "assets/products/3.png",
             imageHover: "assets/products/back3.png",
             description: "Heavy Cotton. Oversized Fitting. Reflective.",
-            sizes: ["M", "L", "XL"],
+            sizes: ["M"],                
             soldOut: false
         },
         
@@ -215,13 +215,11 @@ const CONFIG = {
             image: "assets/products/4.png",
             imageHover: "assets/products/back4.png",
             description: "Heavy Cotton. 300GSM. Backprint. In collaboration w/ 1210",
-            sizes: ["L", "XL"],
+            sizes: ["L", "XL"],       
             soldOut: false
         },
         
     ],
-    
-    
     
     // Size chart data (for modal)
     sizeChart: {
